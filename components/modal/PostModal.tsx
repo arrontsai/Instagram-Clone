@@ -11,11 +11,11 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useSession } from "next-auth/react";
 import React, { useRef, useState } from "react";
 
-import { firestore, storage } from "../../firebase/firebase";
+import { firestore } from "../../firebase/firebase";
+import { uploadImage } from "../../lib/cloudinary";
 import useSelectFile from "../../hooks/useSelectFile";
 
 const style = {
@@ -56,21 +56,19 @@ const PostModal: React.FC<PostModalProps> = ({ open, setOpen }) => {
       });
 
       if (selectedFile) {
-        const imageRef = ref(storage, `posts/${docRef.id}/image`);
-
-        await uploadString(imageRef, selectedFile as string, "data_url").then(
-          async (snapshot) => {
-            const downloadUrl = await getDownloadURL(imageRef);
-            await updateDoc(doc(firestore, "posts", docRef.id), {
-              image: downloadUrl,
-            });
-          }
-        );
+        try {
+          const imageUrl = await uploadImage(selectedFile);
+          await updateDoc(doc(firestore, "posts", docRef.id), {
+            image: imageUrl,
+          });
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
       } else {
         console.log("No Image");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error creating post:", error);
     }
     setSelectedFile("");
     setCaption("");

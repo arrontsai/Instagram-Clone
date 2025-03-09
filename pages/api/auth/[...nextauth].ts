@@ -11,7 +11,12 @@ export default NextAuth({
   ],
 
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log('SignIn Callback:', { user, account, profile });
+      return true;
+    },
     async session({ session, token, user }: any) {
+      console.log('Session Callback:', { session, token, user });
       session.user.username = session?.user?.name
         .split(" ")
         .join("")
@@ -22,5 +27,17 @@ export default NextAuth({
     },
   },
 
-  secret: process.env.NEXT_PUBLIC_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: true,
+  logger: {
+    error: (code, ...message) => {
+      console.error(code, ...message);
+    },
+    warn: (code, ...message) => {
+      console.warn(code, ...message);
+    },
+    debug: (code, ...message) => {
+      console.debug(code, ...message);
+    },
+  },
 });

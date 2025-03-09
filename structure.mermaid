@@ -1,0 +1,63 @@
+graph TD
+    subgraph "前端架構"
+        A[Next.js 應用] --> B[頁面 pages/]
+        A --> C[組件 components/]
+        A --> D[自定義 Hooks hooks/]
+        A --> E[樣式 styles/]
+    end
+    
+    subgraph "頁面 pages/"
+        B --> B1[index.tsx 主頁]
+        B --> B2[_app.tsx 應用入口]
+        B --> B3[profile/ 個人資料頁]
+        B --> B4[auth/ 認證頁面]
+        B --> B5[api/ API 路由]
+    end
+    
+    subgraph "API 路由"
+        B5 --> B5A[auth/nextauth 認證API]
+        B5 --> B5B[hello.ts 測試API]
+    end
+    
+    subgraph "組件 components/"
+        C --> C1[Header.tsx 頁頭]
+        C --> C2[Feed.tsx 信息流]
+        C --> C3[Posts.tsx 貼文列表]
+        C --> C4[Post.tsx 單個貼文]
+        C --> C5[Stories.tsx 故事列表]
+        C --> C6[Story.tsx 單個故事]
+        C --> C7[MiniProfile.tsx 迷你個人資料]
+        C --> C8[Suggestions.tsx 推薦用戶]
+        C --> C9[modal/ 模態框組件]
+        C --> C10[profilePage/ 個人資料頁組件]
+        C --> C11[Skeleton/ 骨架屏組件]
+    end
+    
+    subgraph "後端服務"
+        F[Firebase 服務] --> F1[Authentication 認證]
+        F --> F2[Firestore 數據庫]
+        F --> F3[Storage 存儲]
+    end
+    
+    subgraph "數據流"
+        G[用戶認證] --> G1[NextAuth.js]
+        G1 --> G2[Google 提供者]
+        G2 --> F1
+        
+        H[貼文數據] --> F2
+        H1[圖片上傳] --> F3
+    end
+    
+    %% 連接關係
+    B1 --> C1
+    B1 --> C2
+    C2 --> C3
+    C2 --> C5
+    C2 --> C7
+    C2 --> C8
+    C3 --> C4
+    C5 --> C6
+    
+    %% 數據流關係
+    C4 --> F2
+    C4 --> F3
