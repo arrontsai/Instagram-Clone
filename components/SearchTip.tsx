@@ -19,16 +19,16 @@ const SearchTip: React.FC<SearchTipProps> = ({ searchValue }) => {
             <div className="rounded-full w-14 h-14">
               <img
                 src={faker.image.avatar()}
-                alt={faker.name.firstName()}
+                alt={faker.person.firstName()}
                 className="rounded-full p-[1.5px] border-blue-500 border-2"
               />
             </div>
           </div>
           <div className="pl-4">
             <div className="text-md font-semibold">
-              {faker.name.firstName()}
+              {faker.person.firstName()}
             </div>
-            <div className="text-gray-500">{faker.company.bs()}</div>
+            <div className="text-gray-500">{faker.company.buzzPhrase()}</div>
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
