@@ -12,8 +12,8 @@ const Stories: React.FC<StoriesProps> = () => {
 
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
-      userId: faker.datatype.uuid(),
-      username: faker.internet.userName(),
+      userId: faker.string.uuid(),
+      username: faker.internet.username(),
       avatar: faker.image.avatar(),
       id: i,
     }));

@@ -77,17 +77,23 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ isShow, userData }) => {
 
         <ul className="hidden md:flex space-x-8 mb-4">
           <li>
-            <span className="font-semibold">{faker.random.numeric()}</span>
-            posts
+            <div className="flex items-center">
+              <span className="font-semibold">{faker.string.numeric()}</span>
+              &nbsp;posts
+            </div>
           </li>
 
           <li>
-            <span className="font-semibold">{faker.random.numeric()}K</span>
-            followers
+            <div className="flex items-center">
+              <span className="font-semibold">{faker.string.numeric()}K</span>
+              &nbsp;followers
+            </div>
           </li>
           <li>
-            <span className="font-semibold">{faker.random.numeric()}</span>
-            following
+            <div className="flex items-center">
+              <span className="font-semibold">{faker.string.numeric()}</span>
+              &nbsp;following
+            </div>
           </li>
         </ul>
 

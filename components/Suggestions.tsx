@@ -8,8 +8,8 @@ const Suggestions: React.FC<SuggestionsProps> = () => {
 
   useEffect(() => {
     const suggestions = [...Array(5)].map((_, i) => ({
-      userId: faker.datatype.uuid(),
-      username: faker.internet.userName(),
+      userId: faker.string.uuid(),
+      username: faker.internet.username(),
       avatar: faker.image.avatar(),
       id: i,
     }));
